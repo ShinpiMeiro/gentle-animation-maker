@@ -2,18 +2,6 @@
   "transcript": "Hello, my name is Max",
   "words": [
     {
-      "case": "not-found-in-transcript",
-      "end": 0.01,
-      "phones": [
-        {
-          "duration": 0.01,
-          "phone": "ah_S"
-        }
-      ],
-      "start": 0.0,
-      "word": "uh"
-    },
-    {
       "alignedWord": "hello",
       "case": "success",
       "end": 0.55,
