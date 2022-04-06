@@ -5,40 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f266bfc9-c67b-447c-b1a7-e0c6a78da9c5" name="Changes" comment="first_commit">
-      <change afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/json_align" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/json_align" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/transcript.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +24,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/application.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1yECyxGvwOGEcTjyA6ZCf4CHXaa" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -64,7 +37,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/5_Кухтерин_Томск" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">

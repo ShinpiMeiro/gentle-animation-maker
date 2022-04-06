@@ -1,5 +1,5 @@
 import tkinter as tk
-
+#TODO  this code must be replaced with JScript code
 class App(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
