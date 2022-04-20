@@ -5,40 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f266bfc9-c67b-447c-b1a7-e0c6a78da9c5" name="Changes" comment="first_commit">
-      <change afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_directory/test_custom_types/transcript.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3447c646/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_custom_types/a.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3447c646/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_custom_types/align.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3447c646/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_custom_types/align.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3447c646/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_custom_types/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3447c646/transcript.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4288fe51/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_greet/a.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4288fe51/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_greet/align.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4288fe51/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_greet/align.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4288fe51/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_greet/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4288fe51/json_align" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_greet/json_align" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4288fe51/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_greet/transcript.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_alphabet/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_alphabet/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_custom_types/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/json_align" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/json_align" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_greet/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_greet/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_long/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_long/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_reading_skills/transcript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/a.wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/a.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/align.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/align.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/align.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/align.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_short/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/test_directory/test_short/transcript.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,33 +49,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Szandor\Documents\GitHub\gentle-animation-maker\resources" />
-      <recent name="C:\Users\Szandor\Documents\GitHub\gentle-animation-maker" />
       <recent name="C:\Users\Szandor\Documents\GitHub\gentle-animation-maker\test_directory" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.application">
-    <configuration name="application" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="gentle-animation-maker" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/application.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.help">
     <configuration name="help" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gentle-animation-maker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,7 +97,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.application" />
         <item itemvalue="Python.help" />
       </list>
     </recent_temporary>

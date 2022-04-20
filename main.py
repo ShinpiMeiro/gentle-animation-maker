@@ -5,7 +5,7 @@ from timer_py import Timer
 
 def init_pygame():
     """pygame initialisation"""
-    global screen, display, clock, window_size
+    global screen, display, clock
     pygame.init()
     window_size = (600, 400)
     pygame.display.set_caption('Animation')
@@ -22,7 +22,7 @@ def init_time():
 def init_audio():
     """audio initialisation"""
     global dir_name
-    pygame.mixer.music.load(f'resources/test_directory/{dir_name}/a.wav')
+    pygame.mixer.music.load(f'test_directory/{dir_name}/a.wav')
     pygame.mixer.music.play()
 
 
@@ -145,13 +145,13 @@ def display_phone_and_word():
                 fonts[2],
                 text=str(current_word['alignedWord']),
                 color="white",
-                where=(window_size[0], 300),
+                where=(600, 300),
                 centered=True)
             render(
                 fonts[2],
                 text=str(current_phone['phone']),
                 color="white",
-                where=(window_size[0], 175),
+                where=(600, 175),
                 centered=True)
         except NameError:
             pass
@@ -178,7 +178,7 @@ init_time()
 init_audio()
 fonts = init_fonts([25, 30, 60])
 
-json_align = get_json(f'resources/test_directory/{dir_name}/align.json')
+json_align = get_json(f'test_directory/{dir_name}/align.json')
 current_word_pos = 0
 current_phone_pos = 0
 current_word = json_align['words'][current_word_pos]
