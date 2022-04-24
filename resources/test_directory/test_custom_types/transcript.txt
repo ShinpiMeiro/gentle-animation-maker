@@ -1,1 +1,0 @@
-A good question to ask yourself when working with custom types is what is the minimum amount of information necessary to recreate this object?
