@@ -5,7 +5,7 @@ from timer_py import Timer
 
 def init_pygame():
     """pygame initialisation"""
-    global screen, display, clock
+    global screen, display, clock, window_size
     pygame.init()
     window_size = (600, 400)
     pygame.display.set_caption('Animation')
@@ -59,7 +59,8 @@ def what_should_i_show():
         current_word_pos, word_ended, \
         current_time_start, current_word, \
         current_phone_pos, current_word_len, \
-        current_phone, current_word, transcript_ended
+        current_phone, current_word, transcript_ended, \
+        transcript_and_emotes, emote_face_tag, emote_hands_tag, emote_face, emote_hands
     if not transcript_ended:
         time_now = timer.elapsed(print=False)  # timer present value
         if current_time_end <= time_now:
@@ -68,6 +69,12 @@ def what_should_i_show():
                 transcript_ended = True
                 print('ended!')
             if not transcript_ended:
+                if emote_face_tag in transcript_and_emotes[current_word_pos]:
+                    emote_tag = transcript_and_emotes.pop(current_word_pos)
+                    emote_face = emote_tag[6:-1]
+                if emote_hands_tag in transcript_and_emotes[current_word_pos]:
+                    emote_tag = transcript_and_emotes.pop(current_word_pos)
+                    emote_hands = emote_tag[7:-1]
                 current_word_pos += 1
                 current_phone_pos = 0
                 current_word = json_align['words'][current_word_pos]
@@ -136,7 +143,7 @@ def display_clock():
         centered=False)
 
 
-def display_phone_and_word():
+def display_texts():
     global current_phone, current_word
     time_now = timer.elapsed(print=False)
     if current_time_start <= time_now <= current_time_end:
@@ -145,13 +152,25 @@ def display_phone_and_word():
                 fonts[2],
                 text=str(current_word['alignedWord']),
                 color="white",
-                where=(600, 300),
+                where=(window_size[0], 330),
                 centered=True)
             render(
                 fonts[2],
                 text=str(current_phone['phone']),
                 color="white",
-                where=(600, 175),
+                where=(window_size[0], 220),
+                centered=True)
+            render(
+                fonts[2],
+                text=str(emote_face),
+                color="white",
+                where=(window_size[0], 60),
+                centered=True)
+            render(
+                fonts[2],
+                text=str(emote_hands),
+                color="white",
+                where=(window_size[0], 120),
                 centered=True)
         except NameError:
             pass
@@ -162,7 +181,7 @@ def update_screen():
     quit_button()
     clear_screen()
     display_fps()
-    display_phone_and_word()
+    display_texts()
     display_clock()
     refresh_screen()
 
@@ -172,7 +191,7 @@ def update_screen():
 # =================
 
 
-dir_name = 'test_short'
+dir_name = 'test_custom_types'
 init_pygame()
 init_time()
 init_audio()
@@ -188,6 +207,21 @@ current_time_start = current_word['start']
 current_time_end = current_word['end']
 word_ended = False
 transcript_ended = False
+emote_face_tag = '<face:'
+emote_hands_tag = '<hands:'
+
+emotes_face = ['normal', 'angry', 'intresred', 'clueless']
+emote_face = emotes_face[0]
+emotes_hands = ['down', 'up', 'pointing']
+emote_hands = emotes_hands[0]
+with open(f'test_directory/{dir_name}/transcript.txt', 'r') as f:
+    transcript_and_emotes = str(f.read()).split()
+if emote_face_tag in transcript_and_emotes[current_word_pos]:
+    emote_tag = transcript_and_emotes.pop(current_word_pos)
+    emote_face = emote_tag[6:-1]
+if emote_hands_tag in transcript_and_emotes[current_word_pos]:
+    emote_tag = transcript_and_emotes.pop(current_word_pos)
+    emote_hands = emote_tag[7:-1]
 cycle = True
 while cycle:
     what_should_i_show()
