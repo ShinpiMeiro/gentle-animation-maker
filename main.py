@@ -7,7 +7,7 @@ def init_pygame():
     """pygame initialisation"""
     global screen, display, clock, window_size
     pygame.init()
-    window_size = (600, 400)
+    window_size = (1280, 720)
     pygame.display.set_caption('Animation')
     screen = pygame.display.set_mode(window_size, 0, 32)
     clock = pygame.time.Clock()
@@ -152,28 +152,39 @@ def display_texts():
                 fonts[2],
                 text=str(current_word['alignedWord']),
                 color="white",
-                where=(window_size[0], 330),
+                where=(window_size[0]*0.3, window_size[1]*0.3),
                 centered=True)
             render(
                 fonts[2],
                 text=str(current_phone['phone']),
                 color="white",
-                where=(window_size[0], 220),
+                where=(window_size[0]*0.3, window_size[1]*0.4),
                 centered=True)
+            render(
+                fonts[2],
+                text=str(current_phone['phone']),
+                color="white",
+                where=(window_size[0]*0.82, window_size[1]*0.29),
+                centered=True)    
             render(
                 fonts[2],
                 text=str(emote_face),
                 color="white",
-                where=(window_size[0], 60),
+                where=(window_size[0]*0.3, window_size[1]*0.5),
                 centered=True)
             render(
                 fonts[2],
                 text=str(emote_hands),
                 color="white",
-                where=(window_size[0], 120),
+                where=(window_size[0]*0.3, window_size[1]*0.6),
                 centered=True)
         except NameError:
             pass
+
+def display_key_points():
+    
+    pygame.draw.circle(screen, WHITE, head_position, 5)
+    pygame.draw.circle(screen, WHITE, fork_position, 5)
 
 
 def update_screen():
@@ -181,6 +192,7 @@ def update_screen():
     quit_button()
     clear_screen()
     display_fps()
+    display_key_points()
     display_texts()
     display_clock()
     refresh_screen()
@@ -196,6 +208,11 @@ init_pygame()
 init_time()
 init_audio()
 fonts = init_fonts([25, 30, 60])
+WHITE = (255, 255, 255)
+head_position = (window_size[0]*0.82, window_size[1]*0.29)
+fork_position = (window_size[0]*0.82, window_size[1]*0.71)
+emote_face_tag = '<face:'
+emote_hands_tag = '<hands:'
 
 json_align = get_json(f'test_directory/{dir_name}/align.json')
 current_word_pos = 0
@@ -207,12 +224,10 @@ current_time_start = current_word['start']
 current_time_end = current_word['end']
 word_ended = False
 transcript_ended = False
-emote_face_tag = '<face:'
-emote_hands_tag = '<hands:'
 
 emotes_face = ['normal', 'angry', 'intresred', 'clueless']
 emote_face = emotes_face[0]
-emotes_hands = ['down', 'up', 'pointing']
+emotes_hands = ['down', 'up', 'pointing', 'thinking', 'crossed']
 emote_hands = emotes_hands[0]
 with open(f'test_directory/{dir_name}/transcript.txt', 'r') as f:
     transcript_and_emotes = str(f.read()).split()
