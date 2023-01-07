@@ -103,7 +103,7 @@ def quit_button():
 
 
 def clear_screen():
-    screen.fill((0, 0, 0))
+    screen.fill((200, 200, 255))
 
 
 def refresh_screen():
@@ -115,13 +115,13 @@ def display_fps():
     render(
         fonts[0],
         text='FPS:',
-        color="white",
+        color="black",
         where=(0, 0),
         centered=False)
     render(
         fonts[0],
         text=str(int(clock.get_fps())),
-        color="white",
+        color="black",
         where=(50, 0),
         centered=False)
 
@@ -132,13 +132,13 @@ def display_clock():
     render(
         fonts[0],
         text='TIME:',
-        color="white",
+        color="black",
         where=(0, 20),
         centered=False)
     render(
         fonts[0],
         text=str(elapsed)[:point_pos+3],
-        color="white",
+        color="black",
         where=(60, 20),
         centered=False)
 
@@ -151,40 +151,78 @@ def display_texts():
             render(
                 fonts[2],
                 text=str(current_word['alignedWord']),
-                color="white",
+                color="black",
                 where=(window_size[0]*0.3, window_size[1]*0.3),
                 centered=True)
             render(
                 fonts[2],
                 text=str(current_phone['phone']),
-                color="white",
+                color="black",
                 where=(window_size[0]*0.3, window_size[1]*0.4),
                 centered=True)
             render(
                 fonts[2],
                 text=str(current_phone['phone']),
-                color="white",
+                color="black",
                 where=(window_size[0]*0.82, window_size[1]*0.29),
                 centered=True)    
             render(
                 fonts[2],
                 text=str(emote_face),
-                color="white",
+                color="black",
                 where=(window_size[0]*0.3, window_size[1]*0.5),
                 centered=True)
             render(
                 fonts[2],
                 text=str(emote_hands),
-                color="white",
+                color="black",
                 where=(window_size[0]*0.3, window_size[1]*0.6),
                 centered=True)
         except NameError:
             pass
 
+
 def display_key_points():
     
-    pygame.draw.circle(screen, WHITE, head_position, 5)
-    pygame.draw.circle(screen, WHITE, fork_position, 5)
+    pygame.draw.circle(screen, WHITE, eyes_position, 5)
+    pygame.draw.circle(screen, WHITE, mouth_position, 5)
+
+
+def display_body():
+    current_body_png = down_hands_png
+    current_body_position = (window_size[0]*0.70, window_size[1]*0.15)
+    if emote_hands == emotes_hands[0]:
+        current_body_png = down_hands_png
+        current_body_position = (window_size[0] * 0.70, window_size[1] * 0.15)
+    elif emote_hands == emotes_hands[1]:
+        current_body_png = up_hands_png
+        current_body_position = (window_size[0] * 0.6925, window_size[1] * 0.15)
+    elif emote_hands == emotes_hands[2]:
+        current_body_png = pointing_hands_png
+        current_body_position = (window_size[0] * 0.5925, window_size[1] * 0.15)
+    elif emote_hands == emotes_hands[3]:
+        current_body_png = thinking_hands_png
+        current_body_position = (window_size[0] * 0.6985, window_size[1] * 0.15)
+    elif emote_hands == emotes_hands[4]:
+        current_body_png = crossed_hands_png
+        current_body_position = (window_size[0] * 0.687, window_size[1] * 0.15)
+    screen.blit(current_body_png, (current_body_position[0], current_body_position[1]))
+
+
+def display_brows_and_eyes(x, y):
+    current_brows_png = normal_brows_png
+    current_eyes_png = normal_eyes_png
+    if emote_face == emotes_face[0]:
+        current_brows_png = normal_brows_png
+        current_eyes_png = normal_eyes_png
+    elif emote_face == emotes_face[1]:
+        current_brows_png = angry_brows_png
+        current_eyes_png = angry_eyes_png
+    elif emote_face == emotes_face[2]:
+        current_brows_png = clueless_brows_png
+        current_eyes_png = clueless_eyes_png
+    screen.blit(current_eyes_png, (x+10, y+10))
+    screen.blit(current_brows_png, (x, y))
 
 
 def update_screen():
@@ -192,11 +230,15 @@ def update_screen():
     quit_button()
     clear_screen()
     display_fps()
-    display_key_points()
     display_texts()
     display_clock()
+    display_key_points()
+    display_body()
+    display_brows_and_eyes(eyes_position[0], eyes_position[1])
     refresh_screen()
-
+    #todo delete ->
+    x3, y3 = pygame.mouse.get_pos()
+    print(x3, y3)
 
 # =================
 # =================
@@ -209,8 +251,10 @@ init_time()
 init_audio()
 fonts = init_fonts([25, 30, 60])
 WHITE = (255, 255, 255)
-head_position = (window_size[0]*0.82, window_size[1]*0.29)
-fork_position = (window_size[0]*0.82, window_size[1]*0.71)
+eyes_position = (window_size[0]*0.747, window_size[1]*0.25)
+head_position = (window_size[0]*0.70, window_size[1]*0.15)
+head_position_up = (window_size[0]*0.68, window_size[1]*0.15)
+mouth_position = (window_size[0] * 0.76, window_size[1] * 0.31)
 emote_face_tag = '<face:'
 emote_hands_tag = '<hands:'
 
@@ -225,18 +269,49 @@ current_time_end = current_word['end']
 word_ended = False
 transcript_ended = False
 
-emotes_face = ['normal', 'angry', 'intresred', 'clueless']
+
+normal_brows_png = pygame.image.load('vector/brows/brows (2).png')
+normal_brows_png = pygame.transform.scale(normal_brows_png, (70, 8.4))
+angry_brows_png = pygame.image.load('vector/brows/brows (1).png')
+angry_brows_png = pygame.transform.scale(angry_brows_png, (70, 11.9))
+clueless_brows_png = pygame.image.load('vector/brows/brows (3).png')
+clueless_brows_png = pygame.transform.scale(clueless_brows_png, (70, 16.8))
+
+normal_eyes_png = pygame.image.load('vector/eye/eye (1).png')
+normal_eyes_png = pygame.transform.scale(normal_eyes_png, (49, 19.3))
+angry_eyes_png = pygame.image.load('vector/eye/eye (2).png')
+angry_eyes_png = pygame.transform.scale(angry_eyes_png, (49, 19.3))
+clueless_eyes_png = pygame.image.load('vector/eye/eye (3).png')
+clueless_eyes_png = pygame.transform.scale(clueless_eyes_png, (49, 19.3))
+emotes_face = ['normal', 'angry', 'clueless']
 emote_face = emotes_face[0]
+
+down_hands_png = pygame.image.load('vector/body/body (4).png')
+down_hands_png = pygame.transform.scale(down_hands_png, (190, 600))
+up_hands_png = pygame.image.load('vector/body/body (2).png')
+up_hands_png = pygame.transform.scale(up_hands_png, (211, 600))
+pointing_hands_png = pygame.image.load('vector/body/body (1).png')
+pointing_hands_png = pygame.transform.scale(pointing_hands_png, (328, 600))
+thinking_hands_png = pygame.image.load('vector/body/body (5).png')
+thinking_hands_png = pygame.transform.scale(thinking_hands_png, (193, 600))
+crossed_hands_png = pygame.image.load('vector/body/body (3).png')
+crossed_hands_png = pygame.transform.scale(crossed_hands_png, (224, 600))
 emotes_hands = ['down', 'up', 'pointing', 'thinking', 'crossed']
 emote_hands = emotes_hands[0]
+
+
 with open(f'test_directory/{dir_name}/transcript.txt', 'r') as f:
     transcript_and_emotes = str(f.read()).split()
+
+
 if emote_face_tag in transcript_and_emotes[current_word_pos]:
     emote_tag = transcript_and_emotes.pop(current_word_pos)
     emote_face = emote_tag[6:-1]
 if emote_hands_tag in transcript_and_emotes[current_word_pos]:
     emote_tag = transcript_and_emotes.pop(current_word_pos)
     emote_hands = emote_tag[7:-1]
+
+
 cycle = True
 while cycle:
     what_should_i_show()
