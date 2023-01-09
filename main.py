@@ -60,7 +60,8 @@ def what_should_i_show():
         current_time_start, current_word, \
         current_phone_pos, current_word_len, \
         current_phone, current_word, transcript_ended, \
-        transcript_and_emotes, emote_face_tag, emote_hands_tag, emote_face, emote_hands
+        transcript_and_emotes, emote_face_tag, emote_hands_tag,\
+        emote_face, emote_hands, time_now
     if not transcript_ended:
         time_now = timer.elapsed(print=False)  # timer present value
         if current_time_end <= time_now:
@@ -225,6 +226,36 @@ def display_brows_and_eyes(x, y):
     screen.blit(current_brows_png, (x, y))
 
 
+def display_mouths(x, y):
+    print(current_phone['phone'].split('_')[0])
+    wrong_vowel = False
+    if current_phone['phone'].split('_')[0] in types_mouth[0]:
+        current_mouth_png = open_vowel_mouth_png
+    elif current_phone['phone'].split('_')[0] in types_mouth[1]:
+        current_mouth_png = closed_vowel_mouth_png
+    elif current_phone['phone'].split('_')[0] in types_mouth[2]:
+        current_mouth_png = thin_vowel_mouth_png
+    elif current_phone['phone'].split('_')[0] in types_mouth[3]:
+        current_mouth_png = open_vowel_mouth_png
+    elif current_phone['phone'].split('_')[0] in types_mouth[4]:
+        current_mouth_png = consonants_hissing_mouth_png
+    elif current_phone['phone'].split('_')[0] in types_mouth[5]:
+        current_mouth_png = consonants_crunch_mouth_png
+    elif current_phone['phone'].split('_')[0] in types_mouth[6]:
+        current_mouth_png = consonants_crunch_thud_mouth_png
+    elif current_phone['phone'].split('_')[0] in types_mouth[7]:
+        current_mouth_png = consonants_closed_mouth_png
+    else:
+        current_mouth_png = error_png
+        wrong_vowel = True
+    if current_word['end'] < time_now or time_now < current_word['start']:
+        if wrong_vowel:
+            current_mouth_png = error_png
+        else:
+            current_mouth_png = closed_mouth_png
+    screen.blit(current_mouth_png, (x, y))
+
+
 def update_screen():
     """where everything happens"""
     quit_button()
@@ -235,6 +266,7 @@ def update_screen():
     display_key_points()
     display_body()
     display_brows_and_eyes(eyes_position[0], eyes_position[1])
+    display_mouths(mouth_position[0], mouth_position[1])
     refresh_screen()
     #todo delete ->
     x3, y3 = pygame.mouse.get_pos()
@@ -254,7 +286,7 @@ WHITE = (255, 255, 255)
 eyes_position = (window_size[0]*0.747, window_size[1]*0.25)
 head_position = (window_size[0]*0.70, window_size[1]*0.15)
 head_position_up = (window_size[0]*0.68, window_size[1]*0.15)
-mouth_position = (window_size[0] * 0.76, window_size[1] * 0.31)
+mouth_position = (window_size[0] * 0.76, window_size[1] * 0.305)
 emote_face_tag = '<face:'
 emote_hands_tag = '<hands:'
 
@@ -266,6 +298,7 @@ current_phone = current_word['phones'][current_phone_pos]
 current_word_len = len(current_word['phones'])
 current_time_start = current_word['start']
 current_time_end = current_word['end']
+time_now = 0.0
 word_ended = False
 transcript_ended = False
 
@@ -298,6 +331,35 @@ crossed_hands_png = pygame.image.load('vector/body/body (3).png')
 crossed_hands_png = pygame.transform.scale(crossed_hands_png, (224, 600))
 emotes_hands = ['down', 'up', 'pointing', 'thinking', 'crossed']
 emote_hands = emotes_hands[0]
+
+normal_mouth_png = pygame.image.load('vector/mouth/mouth (8).png')
+normal_mouth_png = pygame.transform.scale(normal_mouth_png, (37.7, 19.3))
+open_vowel_mouth_png = pygame.image.load('vector/mouth/mouth (16).png')
+open_vowel_mouth_png = pygame.transform.scale(open_vowel_mouth_png, (37.7, 19.3))
+closed_vowel_mouth_png = pygame.image.load('vector/mouth/mouth (9).png')
+closed_vowel_mouth_png = pygame.transform.scale(closed_vowel_mouth_png, (37.7, 19.3))
+thin_vowel_mouth_png = pygame.image.load('vector/mouth/mouth (17).png')
+thin_vowel_mouth_png = pygame.transform.scale(thin_vowel_mouth_png, (37.7, 19.3))
+consonants_open_mouth_png = pygame.image.load('vector/mouth/mouth (11).png')
+consonants_open_mouth_png = pygame.transform.scale(consonants_open_mouth_png, (37.7, 19.3))
+consonants_hissing_mouth_png = pygame.image.load('vector/mouth/mouth (17).png')
+consonants_hissing_mouth_png = pygame.transform.scale(consonants_hissing_mouth_png, (37.7, 19.3))
+consonants_crunch_mouth_png = pygame.image.load('vector/mouth/mouth (6).png')
+consonants_crunch_mouth_png = pygame.transform.scale(consonants_crunch_mouth_png, (37.7, 19.3))
+consonants_crunch_thud_mouth_png = pygame.image.load('vector/mouth/mouth (7).png')
+consonants_crunch_thud_mouth_png = pygame.transform.scale(consonants_crunch_thud_mouth_png, (37.7, 19.3))
+consonants_closed_mouth_png = pygame.image.load('vector/mouth/mouth (8).png')
+consonants_closed_mouth_png = pygame.transform.scale(consonants_closed_mouth_png, (37.7, 19.3))
+closed_mouth_png = pygame.image.load('vector/mouth/mouth (8).png')
+closed_mouth_png = pygame.transform.scale(closed_mouth_png, (37.7, 19.3)) #todo заменить на новую текстуру
+error_png = pygame.image.load('vector/eye/eye (1).png')
+error_png = pygame.transform.scale(error_png, (37.7, 19.3))
+
+
+types_mouth = [['ah', 'eh', 'ae', 'ay', 'ey'], ['uh', 'uw', 'y', 'aw', 'er', 'w', 'hh'],
+               ['ih', 'ey', 'iy'], ['g', 'd', 'k', 'n', 'r'], ['s', 'z', 't'], ['ch'], ['f', 'v', 'dh', 'jh', 'ng', 'th'], ['m']]
+# this is not totally correct, but explains basic logic:
+# todo написать логику распределения s17 c6 f7
 
 
 with open(f'test_directory/{dir_name}/transcript.txt', 'r') as f:
