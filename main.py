@@ -360,7 +360,7 @@ types_mouth = [['ah', 'eh', 'ae', 'ay', 'ey'], ['uh', 'uw', 'y', 'aw', 'er', 'w'
                ['ih', 'ey', 'iy'], ['g', 'd', 'k', 'n', 'r'], ['s', 'z', 't'], ['ch'], ['f', 'v', 'dh', 'jh', 'ng', 'th'], ['m']]
 # this is not totally correct, but explains basic logic:
 # todo написать логику распределения s17 c6 f7
-
+# todo исправить баг транскрипции (джейсон в куррент тест)
 
 with open(f'test_directory/{dir_name}/transcript.txt', 'r') as f:
     transcript_and_emotes = str(f.read()).split()
