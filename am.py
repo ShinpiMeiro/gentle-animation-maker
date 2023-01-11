@@ -13,11 +13,23 @@ from PyQt5.QtWebEngineWidgets import *
 import requests
 import json
 import os
-
+from shutil import rmtree
+from pathlib import Path
 
 class Params_Window(QWidget):
     def __init__(self):
         super().__init__()
+        self.setupUi()
+        self.transcription_path = ''
+        self.audio_path = ''
+        self.background_path = ''
+        self.retranslateUi(MainWindow)
+        self.audio_path_button.clicked.connect(self.audio_path_dialog)
+        self.transcription_path_button.clicked.connect(self.transcription_path_dialog)
+        self.background_path_button.clicked.connect(self.background_path_dialog)
+        self.animate_button.clicked.connect(self.animate)
+
+    def setupUi(self):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         MainWindow.setMinimumSize(QSize(800, 600))
@@ -37,78 +49,82 @@ class Params_Window(QWidget):
         self.gridLayout.addItem(spacerItem, 7, 2, 1, 1)
         spacerItem1 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem1, 6, 0, 1, 1)
+
         self.label_background = QLabel(self.gridLayoutWidget)
         self.label_background.setObjectName("label_background")
         self.gridLayout.addWidget(self.label_background, 5, 0, 1, 1)
-        self.transcription_path = QLineEdit(self.gridLayoutWidget)
-        self.transcription_path.setInputMask("")
-        self.transcription_path.setEchoMode(QLineEdit.Normal)
-        self.transcription_path.setReadOnly(True)
-        self.transcription_path.setObjectName("transcription_path")
-        self.gridLayout.addWidget(self.transcription_path, 3, 2, 1, 2)
+
+        self.label_transcription = QLabel(self.gridLayoutWidget)
+        self.label_transcription.setObjectName("label_transcription")
+        self.gridLayout.addWidget(self.label_transcription, 3, 0, 1, 1)
+
+        self.label_audio = QLabel(self.gridLayoutWidget)
+        self.label_audio.setObjectName("label_audio")
+        self.gridLayout.addWidget(self.label_audio, 1, 0, 1, 1)
+
         self.animate_button = QPushButton(self.gridLayoutWidget)
         self.animate_button.setFlat(False)
         self.animate_button.setObjectName("animate_button")
         self.gridLayout.addWidget(self.animate_button, 7, 3, 1, 1)
-        self.audio_path = QLineEdit(self.gridLayoutWidget)
-        self.audio_path.setInputMask("")
-        self.audio_path.setEchoMode(QLineEdit.Normal)
-        self.audio_path.setReadOnly(True)
-        self.audio_path.setObjectName("audio_path")
-        self.gridLayout.addWidget(self.audio_path, 1, 2, 1, 2)
-        self.transcription_path_button = QPushButton(self.gridLayoutWidget)
+
+
+        self.transcription_path_button = QPushButton()
         self.transcription_path_button.setCheckable(False)
         self.transcription_path_button.setAutoExclusive(False)
         self.transcription_path_button.setObjectName("transcription_path_button")
         self.gridLayout.addWidget(self.transcription_path_button, 3, 1, 1, 1)
-        self.label_transcription = QLabel(self.gridLayoutWidget)
-        self.label_transcription.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-        self.label_transcription.setObjectName("label_transcription")
-        self.gridLayout.addWidget(self.label_transcription, 3, 0, 1, 1)
-        self.audio_path_button = QPushButton(self.gridLayoutWidget)
+
+
+        self.audio_path_button = QPushButton()
         self.audio_path_button.setCheckable(False)
         self.audio_path_button.setAutoExclusive(False)
         self.audio_path_button.setObjectName("audio_path_button")
         self.gridLayout.addWidget(self.audio_path_button, 1, 1, 1, 1)
+
         spacerItem2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Maximum)
         self.gridLayout.addItem(spacerItem2, 2, 0, 1, 1)
-        self.label_audio = QLabel(self.gridLayoutWidget)
-        self.label_audio.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-        self.label_audio.setObjectName("label_audio")
-        self.gridLayout.addWidget(self.label_audio, 1, 0, 1, 1)
         spacerItem3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Maximum)
         self.gridLayout.addItem(spacerItem3, 0, 0, 1, 1)
         spacerItem4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Maximum)
         self.gridLayout.addItem(spacerItem4, 4, 0, 1, 1)
-        self.background_path_button = QPushButton(self.gridLayoutWidget)
+
+        self.background_path_button = QPushButton()
         self.background_path_button.setCheckable(False)
         self.background_path_button.setAutoExclusive(False)
         self.background_path_button.setObjectName("background_path_button")
         self.gridLayout.addWidget(self.background_path_button, 5, 1, 1, 1)
-        self.background_path = QLineEdit(self.gridLayoutWidget)
-        self.background_path.setInputMask("")
-        self.background_path.setEchoMode(QLineEdit.Normal)
-        self.background_path.setReadOnly(True)
-        self.background_path.setObjectName("background_path")
-        self.gridLayout.addWidget(self.background_path, 5, 2, 1, 2)
-        MainWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setCentralWidget(self.centralwidget)
 
     def retranslateUi(self, MainWindow):
         _translate = QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "animation maker"))
-        self.label_background.setText(_translate("MainWindow", "Choose your background (.png) file:"))
-        self.transcription_path.setText(_translate("MainWindow", "your path will be here"))
+        self.label_background.setText(_translate("MainWindow", "Choose your background (.png .jpg) file:"))
         self.animate_button.setText(_translate("MainWindow", "Animate"))
-        self.audio_path.setText(_translate("MainWindow", "your path will be here"))
         self.transcription_path_button.setText(_translate("MainWindow", "Choose files..."))
         self.label_transcription.setText(_translate("MainWindow", "Choose your transcription (.txt) file:"))
         self.audio_path_button.setText(_translate("MainWindow", "Choose files..."))
-        self.label_audio.setText(_translate("MainWindow", "Choose your audio (.wav) file:"))
+        self.label_audio.setText(_translate("MainWindow", "Choose your audio (.mp3 .wav) file:"))
         self.background_path_button.setText(_translate("MainWindow", "Choose files..."))
-        self.background_path.setText(_translate("MainWindow", "your path will be here"))
+
+    def transcription_path_dialog(self):
+        self.transcription_path = QFileDialog.getOpenFileName(self, 'Open file',
+                                            'c:\\', "Text files (*.txt)")
+
+    def audio_path_dialog(self):
+        self.audio_path = QFileDialog.getOpenFileName(self, 'Open file',
+                                                              'c:\\', "Audio (*.wav *.mp3)")
+
+    def background_path_dialog(self):
+        self.background_path = QFileDialog.getOpenFileName(self, 'Open file',
+                                                              'c:\\', "Picture (*.png *.jpg)")
+
+    def animate(self):
+        print(self.transcription_path)
+        print(self.audio_path)
+        print(self.background_path)
+
+
 
 
 class Ui_MainWindow(object):
@@ -116,7 +132,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1200, 900)
         MainWindow.setMinimumSize(QSize(1200, 900))
-        MainWindow.setMaximumSize(QSize(1200, 16777215))
+        MainWindow.setMaximumSize(QSize(1200, 900))
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QWidget(self.centralwidget)
@@ -135,6 +151,7 @@ class Ui_MainWindow(object):
         self.link_flag = False
         self.run_button = QPushButton(self.verticalLayoutWidget)
         self.run_button.clicked.connect(self.run)
+        self.run_button.setHidden(True)
 
         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -157,19 +174,23 @@ class Ui_MainWindow(object):
 
     def printurl(self):
         if 'transcriptions' in self.browser.url().url():
+            self.run_button.setHidden(False)
             self.link = str(self.browser.url().url()) + 'align.json'
             self.link_flag = True
 
     def run(self):
         if self.link_flag:
             if os.path.exists('current_test'):
-                os.rmdir('current_test')
-            os.mkdir('current_test')
+                for file in os.listdir('current_test'):
+                    os.remove(os.path.join('current_test', file))
+            else:
+                os.mkdir('current_test')
             with open('current_test/a.json', 'w') as f:
                 res = requests.get(self.link)
                 json.dump(res.json(), f, indent=2)
-            w = Params_Window()
-            w.show()
+            self.w = Params_Window()
+            self.w.show()
+            self.w.hide()
 
 
 if __name__ == "__main__":
