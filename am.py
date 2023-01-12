@@ -16,6 +16,7 @@ import os
 from shutil import rmtree
 from pathlib import Path
 
+
 class Params_Window(QWidget):
     def __init__(self):
         super().__init__()
@@ -67,13 +68,11 @@ class Params_Window(QWidget):
         self.animate_button.setObjectName("animate_button")
         self.gridLayout.addWidget(self.animate_button, 7, 3, 1, 1)
 
-
         self.transcription_path_button = QPushButton()
         self.transcription_path_button.setCheckable(False)
         self.transcription_path_button.setAutoExclusive(False)
         self.transcription_path_button.setObjectName("transcription_path_button")
         self.gridLayout.addWidget(self.transcription_path_button, 3, 1, 1, 1)
-
 
         self.audio_path_button = QPushButton()
         self.audio_path_button.setCheckable(False)
@@ -109,23 +108,18 @@ class Params_Window(QWidget):
 
     def transcription_path_dialog(self):
         self.transcription_path = QFileDialog.getOpenFileName(self, 'Open file',
-                                            'c:\\', "Text files (*.txt)")
+                                                              'c:\\', "Text files (*.txt)")
 
     def audio_path_dialog(self):
         self.audio_path = QFileDialog.getOpenFileName(self, 'Open file',
-                                                              'c:\\', "Audio (*.wav *.mp3)")
+                                                      'c:\\', "Audio (*.wav *.mp3)")
 
     def background_path_dialog(self):
         self.background_path = QFileDialog.getOpenFileName(self, 'Open file',
-                                                              'c:\\', "Picture (*.png *.jpg)")
+                                                           'c:\\', "Picture (*.png *.jpg)")
 
     def animate(self):
-        print(self.transcription_path)
-        print(self.audio_path)
-        print(self.background_path)
-
-
-
+        os.system(f'main.py {self.audio_path[0]} {self.transcription_path[0]} {json_path}')
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -143,7 +137,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
 
         self.browser = QWebEngineView(self.verticalLayoutWidget)
-        self.browser.setUrl(QUrl("http://localhost:49153"))
+        self.browser.setUrl(QUrl("http://localhost:49154"))
         self.verticalLayout_2.addWidget(self.browser)
         self.browser.urlChanged.connect(self.printurl)
 
@@ -179,6 +173,7 @@ class Ui_MainWindow(object):
             self.link_flag = True
 
     def run(self):
+        global json_path
         if self.link_flag:
             if os.path.exists('current_test'):
                 for file in os.listdir('current_test'):
@@ -188,13 +183,16 @@ class Ui_MainWindow(object):
             with open('current_test/a.json', 'w') as f:
                 res = requests.get(self.link)
                 json.dump(res.json(), f, indent=2)
+                json_path = os.path.abspath("current_test/a.json")
             self.w = Params_Window()
             self.w.show()
             self.w.hide()
 
 
+json_path = ''
 if __name__ == "__main__":
     import sys
+
     app = QApplication(sys.argv)
     MainWindow = QMainWindow()
     ui = Ui_MainWindow()

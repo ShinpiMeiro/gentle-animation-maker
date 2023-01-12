@@ -1,6 +1,7 @@
 import pygame
 import json
 from timer_py import Timer
+from sys import argv
 
 
 def init_pygame():
@@ -21,8 +22,7 @@ def init_time():
 
 def init_audio():
     """audio initialisation"""
-    global dir_name
-    pygame.mixer.music.load(f'test_directory/{dir_name}/a.wav')
+    pygame.mixer.music.load(audio_path)
     pygame.mixer.music.play()
 
 
@@ -60,7 +60,7 @@ def what_should_i_show():
         current_time_start, current_word, \
         current_phone_pos, current_word_len, \
         current_phone, current_word, transcript_ended, \
-        transcript_and_emotes, emote_face_tag, emote_hands_tag,\
+        transcript_and_emotes, emote_face_tag, emote_hands_tag, \
         emote_face, emote_hands, time_now
     if not transcript_ended:
         time_now = timer.elapsed(print=False)  # timer present value
@@ -138,7 +138,7 @@ def display_clock():
         centered=False)
     render(
         fonts[0],
-        text=str(elapsed)[:point_pos+3],
+        text=str(elapsed)[:point_pos + 3],
         color="black",
         where=(60, 20),
         centered=False)
@@ -153,45 +153,44 @@ def display_texts():
                 fonts[2],
                 text=str(current_word['alignedWord']),
                 color="black",
-                where=(window_size[0]*0.3, window_size[1]*0.3),
+                where=(window_size[0] * 0.3, window_size[1] * 0.3),
                 centered=True)
             render(
                 fonts[2],
                 text=str(current_phone['phone']),
                 color="black",
-                where=(window_size[0]*0.3, window_size[1]*0.4),
+                where=(window_size[0] * 0.3, window_size[1] * 0.4),
                 centered=True)
             render(
                 fonts[2],
                 text=str(current_phone['phone']),
                 color="black",
-                where=(window_size[0]*0.82, window_size[1]*0.29),
-                centered=True)    
+                where=(window_size[0] * 0.82, window_size[1] * 0.29),
+                centered=True)
             render(
                 fonts[2],
                 text=str(emote_face),
                 color="black",
-                where=(window_size[0]*0.3, window_size[1]*0.5),
+                where=(window_size[0] * 0.3, window_size[1] * 0.5),
                 centered=True)
             render(
                 fonts[2],
                 text=str(emote_hands),
                 color="black",
-                where=(window_size[0]*0.3, window_size[1]*0.6),
+                where=(window_size[0] * 0.3, window_size[1] * 0.6),
                 centered=True)
         except NameError:
             pass
 
 
 def display_key_points():
-    
     pygame.draw.circle(screen, WHITE, eyes_position, 5)
     pygame.draw.circle(screen, WHITE, mouth_position, 5)
 
 
 def display_body():
     current_body_png = down_hands_png
-    current_body_position = (window_size[0]*0.70, window_size[1]*0.15)
+    current_body_position = (window_size[0] * 0.70, window_size[1] * 0.15)
     if emote_hands == emotes_hands[0]:
         current_body_png = down_hands_png
         current_body_position = (window_size[0] * 0.70, window_size[1] * 0.15)
@@ -222,7 +221,7 @@ def display_brows_and_eyes(x, y):
     elif emote_face == emotes_face[2]:
         current_brows_png = clueless_brows_png
         current_eyes_png = clueless_eyes_png
-    screen.blit(current_eyes_png, (x+10, y+10))
+    screen.blit(current_eyes_png, (x + 10, y + 10))
     screen.blit(current_brows_png, (x, y))
 
 
@@ -268,29 +267,36 @@ def update_screen():
     display_brows_and_eyes(eyes_position[0], eyes_position[1])
     display_mouths(mouth_position[0], mouth_position[1])
     refresh_screen()
-    #todo delete ->
+    # todo delete ->
     x3, y3 = pygame.mouse.get_pos()
     print(x3, y3)
 
+
 # =================
 # =================
 # =================
 
+print(argv)
+script, audio_path, transcript_path, json_path = argv
 
-dir_name = 'test_custom_types'
+with open(transcript_path, 'r') as f:
+    transcript_and_emotes = str(f.read()).split()
+json_align = get_json(json_path)
+#todo make backgrounds
+
+
 init_pygame()
 init_time()
 init_audio()
 fonts = init_fonts([25, 30, 60])
 WHITE = (255, 255, 255)
-eyes_position = (window_size[0]*0.747, window_size[1]*0.25)
-head_position = (window_size[0]*0.70, window_size[1]*0.15)
-head_position_up = (window_size[0]*0.68, window_size[1]*0.15)
+eyes_position = (window_size[0] * 0.747, window_size[1] * 0.25)
+head_position = (window_size[0] * 0.70, window_size[1] * 0.15)
+head_position_up = (window_size[0] * 0.68, window_size[1] * 0.15)
 mouth_position = (window_size[0] * 0.76, window_size[1] * 0.305)
 emote_face_tag = '<face:'
 emote_hands_tag = '<hands:'
 
-json_align = get_json(f'test_directory/{dir_name}/align.json')
 current_word_pos = 0
 current_phone_pos = 0
 current_word = json_align['words'][current_word_pos]
@@ -301,7 +307,6 @@ current_time_end = current_word['end']
 time_now = 0.0
 word_ended = False
 transcript_ended = False
-
 
 normal_brows_png = pygame.image.load('vector/brows/brows (2).png')
 normal_brows_png = pygame.transform.scale(normal_brows_png, (70, 8.4))
@@ -350,20 +355,17 @@ consonants_crunch_thud_mouth_png = pygame.image.load('vector/mouth/mouth (7).png
 consonants_crunch_thud_mouth_png = pygame.transform.scale(consonants_crunch_thud_mouth_png, (37.7, 19.3))
 consonants_closed_mouth_png = pygame.image.load('vector/mouth/mouth (8).png')
 consonants_closed_mouth_png = pygame.transform.scale(consonants_closed_mouth_png, (37.7, 19.3))
-closed_mouth_png = pygame.image.load('vector/mouth/mouth (8).png')
-closed_mouth_png = pygame.transform.scale(closed_mouth_png, (37.7, 19.3)) #todo заменить на новую текстуру
+closed_mouth_png = pygame.image.load('vector/mouth/mouth (19).png')
+closed_mouth_png = pygame.transform.scale(closed_mouth_png, (34.5, 21.5))
 error_png = pygame.image.load('vector/eye/eye (1).png')
 error_png = pygame.transform.scale(error_png, (37.7, 19.3))
 
-
 types_mouth = [['ah', 'eh', 'ae', 'ay', 'ey'], ['uh', 'uw', 'y', 'aw', 'er', 'w', 'hh'],
-               ['ih', 'ey', 'iy'], ['g', 'd', 'k', 'n', 'r'], ['s', 'z', 't'], ['ch'], ['f', 'v', 'dh', 'jh', 'ng', 'th'], ['m']]
+               ['ih', 'ey', 'iy'], ['g', 'd', 'k', 'n', 'r'], ['s', 'z', 't'], ['ch'],
+               ['f', 'v', 'dh', 'jh', 'ng', 'th'], ['m']]
 # this is not totally correct, but explains basic logic:
 # todo написать логику распределения s17 c6 f7
 # todo исправить баг транскрипции (джейсон в куррент тест)
-
-with open(f'test_directory/{dir_name}/transcript.txt', 'r') as f:
-    transcript_and_emotes = str(f.read()).split()
 
 
 if emote_face_tag in transcript_and_emotes[current_word_pos]:
@@ -372,7 +374,6 @@ if emote_face_tag in transcript_and_emotes[current_word_pos]:
 if emote_hands_tag in transcript_and_emotes[current_word_pos]:
     emote_tag = transcript_and_emotes.pop(current_word_pos)
     emote_hands = emote_tag[7:-1]
-
 
 cycle = True
 while cycle:
