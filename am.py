@@ -1,20 +1,9 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file '.\ui\am.ui'
-#
-# Created by: PyQt5 UI code generator 5.12.3
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
 import requests
 import json
 import os
-from shutil import rmtree
-from pathlib import Path
 
 
 class Params_Window(QWidget):
@@ -119,7 +108,7 @@ class Params_Window(QWidget):
                                                            'c:\\', "Picture (*.png *.jpg)")
 
     def animate(self):
-        os.system(f'main.py {self.audio_path[0]} {self.transcription_path[0]} {json_path}')
+        os.system(f'main.py True {self.audio_path[0]} {self.transcription_path[0]} {json_path}')
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -137,7 +126,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
 
         self.browser = QWebEngineView(self.verticalLayoutWidget)
-        self.browser.setUrl(QUrl("http://localhost:49154"))
+
+        with open(os.path.abspath('settings.txt'), 'r') as s:
+            port = s.read().split('==')[1]
+        self.browser.setUrl(QUrl(f"http://localhost:{port}"))  # 32768
         self.verticalLayout_2.addWidget(self.browser)
         self.browser.urlChanged.connect(self.printurl)
 

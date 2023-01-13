@@ -53,50 +53,34 @@ def get_json(name):
     return aligned_json
 
 
-def what_should_i_show():
-    """main function to define which word and phoneme we must show now"""
-    global current_time_end, \
-        current_word_pos, word_ended, \
-        current_time_start, current_word, \
-        current_phone_pos, current_word_len, \
-        current_phone, current_word, transcript_ended, \
-        transcript_and_emotes, emote_face_tag, emote_hands_tag, \
-        emote_face, emote_hands, time_now
-    if not transcript_ended:
-        time_now = timer.elapsed(print=False)  # timer present value
-        if current_time_end <= time_now:
-            word_ended = False
-            if current_word_pos >= len(json_align['words']) - 1:  # check whether we should continue
-                transcript_ended = True
-                print('ended!')
-            if not transcript_ended:
-                if emote_face_tag in transcript_and_emotes[current_word_pos]:
-                    emote_tag = transcript_and_emotes.pop(current_word_pos)
-                    emote_face = emote_tag[6:-1]
-                if emote_hands_tag in transcript_and_emotes[current_word_pos]:
-                    emote_tag = transcript_and_emotes.pop(current_word_pos)
-                    emote_hands = emote_tag[7:-1]
-                current_word_pos += 1
-                current_phone_pos = 0
-                current_word = json_align['words'][current_word_pos]
-                current_word_len = len(current_word['phones'])
-                current_time_start, current_time_end = \
-                    current_word['start'], current_word['end']
-        if not transcript_ended:
-            if current_time_start <= time_now and not word_ended:
-                current_phone = current_word['phones'][current_phone_pos]
-                if (current_phone['duration'] + current_time_start) <= time_now:
-                    current_phone_pos += 1
-                    if current_phone_pos == current_word_len:
-                        word_ended = True
+def get_emotes():
+    """searching for optional tags in transcription"""
+    transcript_and_emotes_t = []
+    with open(transcript_path, 'r') as f:
+        transcript_and_emotes_raw = str(f.read()).split()
+        try:
+            real_j = 0
+            for i in range(0, len(transcript_and_emotes_raw)):
+                if '<' in transcript_and_emotes_raw[i]:
+                    real_j -= 1
+                    for j in range(i, len(transcript_and_emotes_raw)):
+                        if '<' in transcript_and_emotes_raw[j]:
+                            pass
+                        else:
+                            pos = j + real_j
+                            break
+                    transcript_and_emotes_t.append([pos, transcript_and_emotes_raw[i]])
+
+        except IndexError:
+            pass
+    return transcript_and_emotes_t
 
 
-# =================
 # ================= pygame screen/event functions
-# =================
 
 
 def quit_button():
+    """quit button for pygame"""
     global cycle
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -104,15 +88,18 @@ def quit_button():
 
 
 def clear_screen():
+    """pygame function what makes screen violet(be default) to paint out previous frame"""
     screen.fill((200, 200, 255))
 
 
 def refresh_screen():
+    """pygame function"""
     pygame.display.flip()
     clock.tick(60)
 
 
 def display_fps():
+    """pygame service function, not used in release"""
     render(
         fonts[0],
         text='FPS:',
@@ -128,6 +115,7 @@ def display_fps():
 
 
 def display_clock():
+    """pygame service function, not used in release"""
     elapsed = timer.elapsed(print=False)
     point_pos = str(elapsed).find('.')
     render(
@@ -145,15 +133,16 @@ def display_clock():
 
 
 def display_texts():
+    """pygame service function, used to show current word"""
     global current_phone, current_word
     time_now = timer.elapsed(print=False)
     if current_time_start <= time_now <= current_time_end:
         try:
             render(
                 fonts[2],
-                text=str(current_word['alignedWord']),
+                text=str(current_word['word']),
                 color="black",
-                where=(window_size[0] * 0.3, window_size[1] * 0.3),
+                where=(window_size[0], window_size[1] * 0.2),
                 centered=True)
             render(
                 fonts[2],
@@ -161,34 +150,12 @@ def display_texts():
                 color="black",
                 where=(window_size[0] * 0.3, window_size[1] * 0.4),
                 centered=True)
-            render(
-                fonts[2],
-                text=str(current_phone['phone']),
-                color="black",
-                where=(window_size[0] * 0.82, window_size[1] * 0.29),
-                centered=True)
-            render(
-                fonts[2],
-                text=str(emote_face),
-                color="black",
-                where=(window_size[0] * 0.3, window_size[1] * 0.5),
-                centered=True)
-            render(
-                fonts[2],
-                text=str(emote_hands),
-                color="black",
-                where=(window_size[0] * 0.3, window_size[1] * 0.6),
-                centered=True)
         except NameError:
             pass
 
 
-def display_key_points():
-    pygame.draw.circle(screen, WHITE, eyes_position, 5)
-    pygame.draw.circle(screen, WHITE, mouth_position, 5)
-
-
 def display_body():
+    """pygame function that decides which body posture it must show"""
     current_body_png = down_hands_png
     current_body_position = (window_size[0] * 0.70, window_size[1] * 0.15)
     if emote_hands == emotes_hands[0]:
@@ -210,6 +177,7 @@ def display_body():
 
 
 def display_brows_and_eyes(x, y):
+    """pygame function that decides which eyes and brows it must show"""
     current_brows_png = normal_brows_png
     current_eyes_png = normal_eyes_png
     if emote_face == emotes_face[0]:
@@ -226,6 +194,7 @@ def display_brows_and_eyes(x, y):
 
 
 def display_mouths(x, y):
+    """pygame function that decides which viseme it should show"""
     print(current_phone['phone'].split('_')[0])
     wrong_vowel = False
     if current_phone['phone'].split('_')[0] in types_mouth[0]:
@@ -235,7 +204,7 @@ def display_mouths(x, y):
     elif current_phone['phone'].split('_')[0] in types_mouth[2]:
         current_mouth_png = thin_vowel_mouth_png
     elif current_phone['phone'].split('_')[0] in types_mouth[3]:
-        current_mouth_png = open_vowel_mouth_png
+        current_mouth_png = consonants_open_mouth_png
     elif current_phone['phone'].split('_')[0] in types_mouth[4]:
         current_mouth_png = consonants_hissing_mouth_png
     elif current_phone['phone'].split('_')[0] in types_mouth[5]:
@@ -256,57 +225,40 @@ def display_mouths(x, y):
 
 
 def update_screen():
-    """where everything happens"""
-    quit_button()
+    """function what does all pygame drawing scripts in order"""
     clear_screen()
-    display_fps()
     display_texts()
-    display_clock()
-    display_key_points()
     display_body()
     display_brows_and_eyes(eyes_position[0], eyes_position[1])
     display_mouths(mouth_position[0], mouth_position[1])
     refresh_screen()
-    # todo delete ->
-    x3, y3 = pygame.mouse.get_pos()
-    print(x3, y3)
 
 
 # =================
-# =================
-# =================
-
 print(argv)
-script, audio_path, transcript_path, json_path = argv
+if len(argv) == 2:  # taking arguments from cmd/os.system('main.py True')
+    script, audio_path, transcript_path, json_path = \
+    ['C:\\Users\\Szandor\\Documents\\GitHub\\gentle-animation-maker\\main.py',
+     'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/a.wav',
+     'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/transcript.txt',
+     'C:\\Users\\Szandor\\Documents\\GitHub\\gentle-animation-maker\\current_test\\a.json']
+elif len(argv) == 5:  # taking arguments from cmd/os.system('main.py False *.mp3 *.txt *.json')
+    script, key, audio_path, transcript_path, json_path = argv
+elif len(argv) == 6:  # taking arguments from cmd/os.system('main.py False *.mp3 *.txt *.json *.png')
+    script, key, audio_path, transcript_path, json_path, background_path = argv
+else:  # handling wrong amount of input
+    print(f'Error: Expected 1/3/4/5 arguments, got {len(argv)-1}')
+    raise SystemExit
 
-with open(transcript_path, 'r') as f:
-    transcript_and_emotes = str(f.read()).split()
-json_align = get_json(json_path)
-#todo make backgrounds
+transcript_and_emotes = get_emotes()
 
 
-init_pygame()
-init_time()
-init_audio()
-fonts = init_fonts([25, 30, 60])
-WHITE = (255, 255, 255)
-eyes_position = (window_size[0] * 0.747, window_size[1] * 0.25)
-head_position = (window_size[0] * 0.70, window_size[1] * 0.15)
-head_position_up = (window_size[0] * 0.68, window_size[1] * 0.15)
-mouth_position = (window_size[0] * 0.76, window_size[1] * 0.305)
-emote_face_tag = '<face:'
-emote_hands_tag = '<hands:'
+json_align = get_json(json_path)  # gathering phoneme data from json
+# todo make backgrounds
 
-current_word_pos = 0
-current_phone_pos = 0
-current_word = json_align['words'][current_word_pos]
-current_phone = current_word['phones'][current_phone_pos]
-current_word_len = len(current_word['phones'])
-current_time_start = current_word['start']
-current_time_end = current_word['end']
-time_now = 0.0
-word_ended = False
-transcript_ended = False
+
+emote_face_tag = '<face:'  # tag body used in transcription
+emote_hands_tag = '<hands:'  # tag body used in transcription
 
 normal_brows_png = pygame.image.load('vector/brows/brows (2).png')
 normal_brows_png = pygame.transform.scale(normal_brows_png, (70, 8.4))
@@ -363,20 +315,53 @@ error_png = pygame.transform.scale(error_png, (37.7, 19.3))
 types_mouth = [['ah', 'eh', 'ae', 'ay', 'ey'], ['uh', 'uw', 'y', 'aw', 'er', 'w', 'hh'],
                ['ih', 'ey', 'iy'], ['g', 'd', 'k', 'n', 'r'], ['s', 'z', 't'], ['ch'],
                ['f', 'v', 'dh', 'jh', 'ng', 'th'], ['m']]
-# this is not totally correct, but explains basic logic:
-# todo написать логику распределения s17 c6 f7
-# todo исправить баг транскрипции (джейсон в куррент тест)
 
 
-if emote_face_tag in transcript_and_emotes[current_word_pos]:
-    emote_tag = transcript_and_emotes.pop(current_word_pos)
-    emote_face = emote_tag[6:-1]
-if emote_hands_tag in transcript_and_emotes[current_word_pos]:
-    emote_tag = transcript_and_emotes.pop(current_word_pos)
-    emote_hands = emote_tag[7:-1]
-
+current_word_pos = 0
+current_phone_pos = 0
+current_word = json_align['words'][current_word_pos]
+current_phone = current_word['phones'][current_phone_pos]
+current_word_len = len(current_word['phones'])
+current_time_start = current_word['start']
+current_time_end = current_word['end']
+time_now = 0.0
+word_ended = False
+transcript_ended = False
 cycle = True
+init_pygame()  # explanations in the body of the function
+init_time()  # explanations in the body of the function
+init_audio()  # explanations in the body of the function
+fonts = init_fonts([25, 30, 60])
+eyes_position = (window_size[0] * 0.747, window_size[1] * 0.25)  # default position for eyes
+head_position = (window_size[0] * 0.70, window_size[1] * 0.15)  # default position for body
+mouth_position = (window_size[0] * 0.76, window_size[1] * 0.305)  # default position for mouth
 while cycle:
-    what_should_i_show()
-    update_screen()
-pygame.quit()
+    if not transcript_ended:
+        time_now = timer.elapsed(print=False)  # timer present value
+        if current_time_end <= time_now:
+            word_ended = False
+            if current_word_pos >= len(json_align['words']) - 1:  # check whether we should continue
+                transcript_ended = True
+            if not transcript_ended:
+                for emote in transcript_and_emotes:  # check whether we should change emotes
+                    if emote_face_tag in emote[1]:
+                        if current_word_pos == emote[0]:
+                            emote_face = emote[1][6:-1]
+                    if emote_hands_tag in emote[1]:
+                        if current_word_pos == emote[0]:
+                            emote_hands = emote[1][7:-1]
+                current_word_pos += 1  # redefining
+                current_phone_pos = 0  # redefining
+                current_word = json_align['words'][current_word_pos]  # redefining
+                current_word_len = len(current_word['phones'])  # redefining
+                current_time_start, current_time_end = current_word['start'], current_word['end']  # redefining
+        if not transcript_ended:
+            if current_time_start <= time_now and not word_ended:
+                current_phone = current_word['phones'][current_phone_pos]
+                if (current_phone['duration'] + current_time_start) <= time_now:  # check whether we should change phoneme
+                    current_phone_pos += 1
+                    if current_phone_pos == current_word_len:
+                        word_ended = True
+    update_screen()  # explanations in the body of the function
+    quit_button()
+pygame.quit()  # explanations in the body of the function
