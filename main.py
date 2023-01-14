@@ -1,3 +1,5 @@
+import os.path
+
 import pygame
 import json
 from timer_py import Timer
@@ -206,7 +208,7 @@ def display_brows_and_eyes(x, y):
 
 def display_mouths(x, y):
     """pygame function that decides which viseme it should show"""
-    print(current_phone['phone'].split('_')[0])
+    # print(current_phone['phone'].split('_')[0])
     wrong_vowel = False
     if current_phone['phone'].split('_')[0] in types_mouth[0]:
         current_mouth_png = open_vowel_mouth_png
@@ -251,13 +253,13 @@ def update_screen():
 # =================
 
 
-print(argv)
 if len(argv) == 1:  # taking arguments from cmd/os.system('main.py True')
+    gentle_path = os.path.abspath('../gentle-animation-maker')
     script, audio_path, transcript_path, json_path = \
-    ['C:\\Users\\Szandor\\Documents\\GitHub\\gentle-animation-maker\\main.py',
-     'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/a.wav',
-     'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/transcript.txt',
-     'C:\\Users\\Szandor\\Documents\\GitHub\\gentle-animation-maker\\current_test\\a.json']
+    [f'{gentle_path}/main.py',
+     f'{gentle_path}/test_directory/test_reading_skills/a.wav',
+     f'{gentle_path}/test_directory/test_reading_skills/transcript.txt',
+     f'{gentle_path}/current_test/a.json']
 elif len(argv) == 5:  # taking arguments from cmd/os.system('main.py False *.mp3 *.txt *.json')
     script, key, audio_path, transcript_path, json_path = argv
     background_path = ''
