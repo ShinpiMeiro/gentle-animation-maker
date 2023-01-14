@@ -115,12 +115,13 @@ def display_fps():
 
 
 def get_background(background_path_t, window_size_t):
-    """pygame service function, used to show current background"""
+    """pygame service function, used to initialise background"""
     background_png_t = pygame.image.load(background_path_t)
     return pygame.transform.scale(background_png_t, window_size_t)
 
 
 def display_background():
+    """pygame service function, used to show current background"""
     screen.blit(background, (0, 0))
 
 
@@ -257,14 +258,13 @@ if len(argv) == 1:  # taking arguments from cmd/os.system('main.py True')
      'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/a.wav',
      'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/transcript.txt',
      'C:\\Users\\Szandor\\Documents\\GitHub\\gentle-animation-maker\\current_test\\a.json']
-    background_path = 'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/imgonline-com-ua-Resize-6jAdIMLo1c3p7.jpg'
 elif len(argv) == 5:  # taking arguments from cmd/os.system('main.py False *.mp3 *.txt *.json')
     script, key, audio_path, transcript_path, json_path = argv
     background_path = ''
 elif len(argv) == 6:  # taking arguments from cmd/os.system('main.py False *.mp3 *.txt *.json *.png')
     script, key, audio_path, transcript_path, json_path, background_path = argv
 else:  # handling wrong amount of input
-    print(f'Error: Expected 1/3/4/5 arguments, got {len(argv)-1}')
+    print(f'Error: Expected 1/5/6 arguments, got {len(argv)-1}')
     raise SystemExit
 
 
