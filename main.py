@@ -114,6 +114,16 @@ def display_fps():
         centered=False)
 
 
+def get_background(background_path_t, window_size_t):
+    """pygame service function, used to show current background"""
+    background_png_t = pygame.image.load(background_path_t)
+    return pygame.transform.scale(background_png_t, window_size_t)
+
+
+def display_background():
+    screen.blit(background, (0, 0))
+
+
 def display_clock():
     """pygame service function, not used in release"""
     elapsed = timer.elapsed(print=False)
@@ -226,7 +236,10 @@ def display_mouths(x, y):
 
 def update_screen():
     """function what does all pygame drawing scripts in order"""
-    clear_screen()
+    if use_background:
+        display_background()
+    else:
+        clear_screen()
     display_texts()
     display_body()
     display_brows_and_eyes(eyes_position[0], eyes_position[1])
@@ -235,23 +248,27 @@ def update_screen():
 
 
 # =================
+
+
 print(argv)
-if len(argv) == 2:  # taking arguments from cmd/os.system('main.py True')
+if len(argv) == 1:  # taking arguments from cmd/os.system('main.py True')
     script, audio_path, transcript_path, json_path = \
     ['C:\\Users\\Szandor\\Documents\\GitHub\\gentle-animation-maker\\main.py',
      'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/a.wav',
      'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/transcript.txt',
      'C:\\Users\\Szandor\\Documents\\GitHub\\gentle-animation-maker\\current_test\\a.json']
+    background_path = 'C:/Users/Szandor/Documents/GitHub/gentle-animation-maker/test_directory/test_reading_skills/imgonline-com-ua-Resize-6jAdIMLo1c3p7.jpg'
 elif len(argv) == 5:  # taking arguments from cmd/os.system('main.py False *.mp3 *.txt *.json')
     script, key, audio_path, transcript_path, json_path = argv
+    background_path = ''
 elif len(argv) == 6:  # taking arguments from cmd/os.system('main.py False *.mp3 *.txt *.json *.png')
     script, key, audio_path, transcript_path, json_path, background_path = argv
 else:  # handling wrong amount of input
     print(f'Error: Expected 1/3/4/5 arguments, got {len(argv)-1}')
     raise SystemExit
 
-transcript_and_emotes = get_emotes()
 
+transcript_and_emotes = get_emotes()  # getting emotes to show in animation
 
 json_align = get_json(json_path)  # gathering phoneme data from json
 # todo make backgrounds
@@ -276,6 +293,7 @@ clueless_eyes_png = pygame.transform.scale(clueless_eyes_png, (49, 19.3))
 emotes_face = ['normal', 'angry', 'clueless']
 emote_face = emotes_face[0]
 
+
 down_hands_png = pygame.image.load('vector/body/body (4).png')
 down_hands_png = pygame.transform.scale(down_hands_png, (190, 600))
 up_hands_png = pygame.image.load('vector/body/body (2).png')
@@ -288,6 +306,7 @@ crossed_hands_png = pygame.image.load('vector/body/body (3).png')
 crossed_hands_png = pygame.transform.scale(crossed_hands_png, (224, 600))
 emotes_hands = ['down', 'up', 'pointing', 'thinking', 'crossed']
 emote_hands = emotes_hands[0]
+
 
 normal_mouth_png = pygame.image.load('vector/mouth/mouth (8).png')
 normal_mouth_png = pygame.transform.scale(normal_mouth_png, (37.7, 19.3))
@@ -316,7 +335,6 @@ types_mouth = [['ah', 'eh', 'ae', 'ay', 'ey'], ['uh', 'uw', 'y', 'aw', 'er', 'w'
                ['ih', 'ey', 'iy'], ['g', 'd', 'k', 'n', 'r'], ['s', 'z', 't'], ['ch'],
                ['f', 'v', 'dh', 'jh', 'ng', 'th'], ['m']]
 
-
 current_word_pos = 0
 current_phone_pos = 0
 current_word = json_align['words'][current_word_pos]
@@ -327,14 +345,28 @@ current_time_end = current_word['end']
 time_now = 0.0
 word_ended = False
 transcript_ended = False
-cycle = True
+
+
 init_pygame()  # explanations in the body of the function
 init_time()  # explanations in the body of the function
 init_audio()  # explanations in the body of the function
+
+try:
+    if background_path:
+        use_background = True
+        background = get_background(background_path, window_size)
+    else:
+        use_background = False
+except NameError:
+    use_background = False
+
 fonts = init_fonts([25, 30, 60])
+
 eyes_position = (window_size[0] * 0.747, window_size[1] * 0.25)  # default position for eyes
 head_position = (window_size[0] * 0.70, window_size[1] * 0.15)  # default position for body
 mouth_position = (window_size[0] * 0.76, window_size[1] * 0.305)  # default position for mouth
+
+cycle = True
 while cycle:
     if not transcript_ended:
         time_now = timer.elapsed(print=False)  # timer present value

@@ -87,7 +87,7 @@ class Params_Window(QWidget):
     def retranslateUi(self, MainWindow):
         _translate = QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "animation maker"))
-        self.label_background.setText(_translate("MainWindow", "Choose your background (.png .jpg) file:"))
+        self.label_background.setText(_translate("MainWindow", "Choose your background (ratio - 16:9) (.png .jpg) file:"))
         self.animate_button.setText(_translate("MainWindow", "Animate"))
         self.transcription_path_button.setText(_translate("MainWindow", "Choose files..."))
         self.label_transcription.setText(_translate("MainWindow", "Choose your transcription (.txt) file:"))
@@ -108,7 +108,8 @@ class Params_Window(QWidget):
                                                            'c:\\', "Picture (*.png *.jpg)")
 
     def animate(self):
-        os.system(f'main.py True {self.audio_path[0]} {self.transcription_path[0]} {json_path}')
+        os.system(f'main.py True {self.audio_path[0]} {self.transcription_path[0]} {json_path} {self.background_path[0]}')
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
