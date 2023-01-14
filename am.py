@@ -128,9 +128,9 @@ class Ui_MainWindow(object):
 
         self.browser = QWebEngineView(self.verticalLayoutWidget)
 
-        with open(os.path.abspath('settings.txt'), 'r') as s:
+        with open(os.path.abspath('config.txt'), 'r') as s:
             port = s.read().split('==')[1]
-        self.browser.setUrl(QUrl(f"http://localhost:{port}"))  # 32768
+        self.browser.setUrl(QUrl(f"http://localhost:{port}"))
         self.verticalLayout_2.addWidget(self.browser)
         self.browser.urlChanged.connect(self.printurl)
 
