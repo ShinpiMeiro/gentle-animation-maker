@@ -257,9 +257,6 @@ if len(argv) == 1:  # taking arguments from cmd/os.system('main.py True')
     gentle_path = os.path.abspath('../gentle-animation-maker')
     script, audio_path, transcript_path, json_path = \
     [f'{gentle_path}/main.py',
-     f'{gentle_path}/test_directory/test_reading_skills/a.wav',
-     f'{gentle_path}/test_directory/test_reading_skills/transcript.txt',
-     f'{gentle_path}/current_test/a.json']
 elif len(argv) == 5:  # taking arguments from cmd/os.system('main.py False *.mp3 *.txt *.json')
     script, key, audio_path, transcript_path, json_path = argv
     background_path = ''
@@ -333,9 +330,9 @@ closed_mouth_png = pygame.transform.scale(closed_mouth_png, (34.5, 21.5))
 error_png = pygame.image.load('vector/eye/eye (1).png')
 error_png = pygame.transform.scale(error_png, (37.7, 19.3))
 
-types_mouth = [['ah', 'eh', 'ae', 'ay', 'ey'], ['uh', 'uw', 'y', 'aw', 'er', 'w', 'hh'],
-               ['ih', 'ey', 'iy'], ['g', 'd', 'k', 'n', 'r'], ['s', 'z', 't'], ['ch'],
-               ['f', 'v', 'dh', 'jh', 'ng', 'th'], ['m']]
+types_mouth = [['ah', 'eh', 'ae', 'ay', 'ey', 'aa'], ['uh', 'uw', 'y', 'aw', 'er', 'w', 'hh', 'ao', 'ow'],
+               ['ih', 'ey', 'iy'], ['g', 'd', 'k', 'n', 'r'], ['s', 'z', 't', 'oov', 'zh'], ['ch', 'l', 'sh'],
+               ['f', 'v', 'dh', 'jh', 'ng', 'th'], ['m', 'p', 'b']]
 
 current_word_pos = 0
 current_phone_pos = 0

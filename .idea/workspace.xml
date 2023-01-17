@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f266bfc9-c67b-447c-b1a7-e0c6a78da9c5" name="Changes" comment="first_commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/am.py" beforeDir="false" afterPath="$PROJECT_DIR$/am.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_directory/test_custom_types/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_custom_types/transcript.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_directory/test_reading_skills/transcript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_directory/test_reading_skills/transcript.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,10 +47,34 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Szandor\Documents\GitHub\gentle-animation-maker\test_directory\test_russel" />
+      <recent name="C:\Users\Szandor\Documents\GitHub\gentle-animation-maker\test_directory\test_greet" />
       <recent name="C:\Users\Szandor\Documents\GitHub\gentle-animation-maker\test_directory" />
+      <recent name="C:\Users\Szandor\Documents\GitHub\gentle-animation-maker" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.am (1)">
+    <configuration name="am (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="gentle-animation-maker" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/am.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="am" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gentle-animation-maker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -71,7 +96,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="help" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="am_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gentle-animation-maker" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -83,7 +108,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/help.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/am_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -113,6 +138,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="gentle-animation-maker" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests in test_long" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="gentle-animation-maker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,9 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.am (1)" />
+        <item itemvalue="Python.am_test" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.am" />
         <item itemvalue="Python tests.Python tests in test_long" />
-        <item itemvalue="Python.help" />
       </list>
     </recent_temporary>
   </component>
@@ -169,5 +217,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first_commit" />
     <option name="LAST_COMMIT_MESSAGE" value="first_commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/am.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
